@@ -12,7 +12,7 @@ bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, 'Привяо. Вы находитесь в телеграмм-боте, который отображает погоду аэропортах в специальном формате.\n'
+    bot.send_message(message.chat.id, 'Приветствую. Вы находитесь в телеграмм-боте, который отображает погоду аэропортах в специальном формате.\n'
                      + 'Для получения иснтрукций по использованию вы можете обратится в раздел "Помощь"')
     main_menu(message)
 
