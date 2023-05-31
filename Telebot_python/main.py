@@ -18,8 +18,8 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def get_text(message):
     if message.text == 'Узнать погоду':
-        bot.send_message(message.chat.id, 'Введите какое-нибудь сообщение')
-        bot.register_next_step_handler(message, get_weather)
+        msg = bot.send_message(message.chat.id, 'Введите какое-нибудь сообщение')
+        bot.register_next_step_handler(msg, get_weather)
     elif message.text == 'Помощь':
         get_help(message)
     elif message.text == 'Выйти в главное меню':
@@ -33,7 +33,18 @@ def get_weather(message):
     bt_main_menu = types.KeyboardButton('Выйти в главное меню')
     markup.add(bt_main_menu)
 
-    bot.send_message(message.chat.id, f'Вы ввели {message.text}', reply_markup=markup)
+    bot.send_message(message.chat.id, f'Вы ввели: {message.text}', reply_markup=markup)
+
+    req_airport = message.text
+    url = 'https://metartaf.ru/' + req_airport
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        bot.send_message(message.chat.id, 'Все в порядке. Ваш аэропорт найден')
+
+    else:
+        repeat_message = bot.send_message(message.chat.id, 'Не смог вас понять, повторите ввод')
+        bot.register_next_step_handler(repeat_message, get_weather)
 
 
 def get_help(message):
