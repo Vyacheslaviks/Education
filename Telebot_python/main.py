@@ -23,7 +23,7 @@ def get_text(message):
         bt_main_menu = types.KeyboardButton('Выйти в главное меню')
         markup.add(bt_main_menu)
 
-        msg = bot.send_message(message.chat.id, 'Введите какое-нибудь сообщение', reply_markup=markup)
+        msg = bot.send_message(message.chat.id, 'Введите ИКАО-код аэропорта (список тестовых аэропортов приведен в разделе помощь)', reply_markup=markup)
         bot.register_next_step_handler(msg, get_weather)
     elif message.text == 'Помощь':
         get_help(message)
@@ -76,7 +76,7 @@ def get_help(message):
     markup.add(bt_main_menu)
 
     bot.send_message(message.chat.id, 'Бот предоставляет информацию о погоде в крупных аэропортах СНГ, взятой с сайта: "https://metartaf.ru/".\n' 
-                     + 'Для корректной работы необходимо ввести ИКАО-код аэропорта, вот список наиболее частых:\n'
+                     + 'Для корректной работы необходимо ввести ИКАО-код аэропорта, вот список наиболее популярных:\n'
                      + 'Москва, Шереметьево - UUEE\nМосква, Домодедово - UUDD\nМосква, Внуково - UUWW\n'
                      + 'Санкт-Петербург, Пулково - ULLI\nСочи, Адлер - URSS\nЕкатеринбург, Кольцово - USSS\n'
                      + 'Новосибирск, Толмачево - UNNT.\n\nДля получения полного списка аэропртов, можете обратится на сайт\n\n'
